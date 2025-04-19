@@ -27,6 +27,7 @@
   "products": {
     "casual": "Thường ngày",
     "sort_by": "Sắp xếp theo",
+    "faq": "Chưa có câu hỏi nào 😊😊😊",
     "sort_by_options": {
       "newest": "Mới nhất",
       "oldest": "Cũ nhất",
@@ -95,6 +96,13 @@
     "button": "Đăng nhập",
     "sign_in": "Đăng nhập",
     "sign_up": "Đăng ký",
-    "not_account": "Chưa có tài khoản?"
+    "not_account": "Chưa có tài khoản?",
+    "description": "Chức năng đăng nhập cho phép người dùng đăng nhập vào hệ thống bằng email/số điện thoại và mật khẩu",
+    "login_success": "Đăng nhập thành công",
+    "login_failed": "Đăng nhập thất bại",
+    "login_error": "Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại sau.",
+    "notification": {
+      "title": "Thông báo"
+    }
   }
 }

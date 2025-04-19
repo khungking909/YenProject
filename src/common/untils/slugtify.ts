@@ -8,15 +8,14 @@ function convertViToEn(str: string, toUpperCase = false) {
   str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
   str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
   str = str.replace(/đ/g, 'd');
-  // Some system encode vietnamese combining accent as individual utf-8 characters
-  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ''); // Huyền sắc hỏi ngã nặng
-  str = str.replace(/\u02C6|\u0306|\u031B/g, ''); // Â, Ê, Ă, Ơ, Ư
+  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, '');
+  str = str.replace(/\u02C6|\u0306|\u031B/g, '');
 
   return toUpperCase ? str.toUpperCase() : str;
 }
 export { convertViToEn };
 
-function slugtify(title: string) {
+function slugify(title: string) {
   const processedTitle = title.replace(/[^a-zA-Z0-9]/g, ' ');
 
   return processedTitle
@@ -26,4 +25,4 @@ function slugtify(title: string) {
     .join('-');
 }
 
-export { slugtify };
+export { slugify };

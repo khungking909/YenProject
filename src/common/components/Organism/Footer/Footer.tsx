@@ -5,7 +5,7 @@ import { FooterMenu } from '@components/Atom/FooterMenu';
 import { Email } from '@components/Atom/Icon/icons/Email';
 import { Facebook } from '@components/Atom/Icon/icons/Facebook';
 import { Telegram } from '@components/Atom/Icon/icons/Telegram';
-import { Zalo } from '@components/Atom/Icon/icons/Zalo';
+import { ZaloIcon } from '@components/Atom/Icon/icons/Zalo';
 import { Image } from '@components/Atom/Image';
 import { Input } from '@components/Atom/Input';
 import { Typography } from '@components/Atom/Typography';
@@ -122,7 +122,7 @@ const Footer = () => {
                 <Facebook size="3XLarge" />
               </Link>
               <Link to="/zalo">
-                <Zalo size="3XLarge" />
+                <ZaloIcon size="3XLarge" />
               </Link>
               <Link to="/telegram">
                 <Telegram size="3XLarge" />

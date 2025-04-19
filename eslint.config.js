@@ -25,9 +25,7 @@ export default [
       '@cspell/spellchecker': [
         'warn',
         {
-          cspell: {
-            import: ['./cspell.config.yml', '@cspell/dict-typescript'],
-          },
+          cspell: false,
           cspellOptionsRoot: import.meta.url,
         },
       ],
@@ -43,7 +41,6 @@ export default [
         },
       ],
       'no-console': 'warn',
-      'no-unescaped-entities': 'off',
     },
   },
   {

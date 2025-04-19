@@ -357,7 +357,7 @@ export default function ProductDetail() {
             </Review>
           </TabPanel>
           <TabPanel tabPanelIndex={2} activeTab={activeTab}>
-            <Typography textAlign="center">Chưa có câu hỏi nào 😊😊😊</Typography>
+            <Typography textAlign="center">{t('products.faq')}</Typography>
           </TabPanel>
         </Box>
         <Box

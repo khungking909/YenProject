@@ -46,8 +46,8 @@ export default function SignIn() {
       }).unwrap();
 
       onShowToast({
-        message: 'Đăng nhập thành công',
-        title: 'Thông báo',
+        message: t('login.login_success'),
+        title: t('login.notification.title'),
         duration: 3000,
         position: 'top-right',
         type: 'success',
@@ -57,8 +57,8 @@ export default function SignIn() {
     } catch (error) {
       if ((error as { status: number }).status === 404) {
         onShowToast({
-          message: 'Tài khoản không tồn tại',
-          title: 'Thông báo',
+          message: t('login.login_fail'),
+          title: t('login.notification.title'),
           duration: 3000,
           position: 'top-right',
           type: 'warning',
@@ -150,8 +150,7 @@ export default function SignIn() {
                   Sign In
                 </Typography>
                 <Typography variant="text" textAlign="center" fontSize={isMobile ? 'sm' : 'base'}>
-                  Chức năng Sign In cho phép người dùng đăng nhập vào hệ thống bằng email/số điện thoại và mật
-                  khẩu
+                  {t('login.description')}
                 </Typography>
               </Box>
               <Form onSubmit={handleSubmit(onSubmit)}>

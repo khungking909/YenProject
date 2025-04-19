@@ -33,6 +33,7 @@
       "price_asc": "Price: Low to High",
       "price_desc": "Price: High to Low"
     },
+    "faq": "No questions yet 😊😊😊",
     "add_to_cart": "Add to cart",
     "like": "Like",
     "color": "Color",
@@ -96,6 +97,14 @@
     "forgot_password": "Forgot password?",
     "register": "Register",
     "sign_in": "Sign in",
-    "not_account": "Don't have an account?"
+    "not_account": "Don't have an account?",
+    "description": "The Sign In function allows users to log in to the system using email/phone number and password.",
+    "login_success": "Login successful",
+    "login_failed": "Login failed",
+    "login_error": "Login error",
+    "notification": {
+      "title": "Notification",
+      "message": "Login error. Please try again later."
+    }
   }
 }

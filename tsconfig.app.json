@@ -36,11 +36,5 @@
 
     "types": ["@testing-library/jest-dom"]
   },
-  "include": [
-    "src",
-    "vitest.prepare.ts",
-    "src/i18n/translate/en/en.json",
-    "src/i18n/translate/vi/vi.json",
-    "src/common/components/Badge/.stories.ts"
-  ]
+  "include": ["src", "public/i18n", "vitest.prepare.ts"]
 }
