@@ -4,7 +4,6 @@ import { RouterProvider } from 'react-router-dom';
 import { useGetUserFromTokenQuery } from 'src/app/apis/authApi';
 import router from 'src/app/routes/Router';
 import { setUser } from 'src/app/slices/authSlice/authSlice';
-import './i18n';
 
 const AppComponent = () => {
   const dispatch = useDispatch();
