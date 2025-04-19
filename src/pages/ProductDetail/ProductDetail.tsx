@@ -396,14 +396,14 @@ export default function ProductDetail() {
             >
               {data.map((item) => {
                 return (
-                  <Link to={`/product/${item.id}`} key={item.id}>
+                  <Link to={`/product/${item.slug}`} key={item.id}>
                     <ProductCard
                       columns={4}
                       image={item.images[0]}
                       name={item.name}
                       price={item.price}
                       salePrice={item.salePrice}
-                      rate={item.rate}
+                      rate={item.rating}
                       onClickAddToCart={() => handleAddToCartOutstanding(item)}
                     />
                   </Link>

@@ -1,1 +1,0 @@
-export { axios } from './axios';

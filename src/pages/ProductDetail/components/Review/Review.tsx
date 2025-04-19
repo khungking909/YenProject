@@ -33,7 +33,7 @@ export function Review({ children }: { children?: React.ReactNode }) {
       }}
     >
       <Dialog open={isOpen} onCloseDialog={closeModal} type="center">
-        <ReviewPopup productId="1" closeModal={closeModal} />
+        <ReviewPopup closeModal={closeModal} />
       </Dialog>
       <Typography fontSize="2xl" fontWeight="semibold">
         {t('products.reviews.all_reviews')}
