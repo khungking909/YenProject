@@ -1,3 +1,4 @@
+/* eslint-disable @cspell/spellchecker */
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import HttpBackend from 'i18next-http-backend';
@@ -11,6 +12,7 @@ i18n
     debug: false,
     lng: 'vi',
     fallbackLng: 'vi', // use vi if detected lng is not available
+    supportedLngs: ['vi', 'en'],
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

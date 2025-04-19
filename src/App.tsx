@@ -1,4 +1,3 @@
-import './i18n.ts';
 import { memo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
