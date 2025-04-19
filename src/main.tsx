@@ -1,9 +1,8 @@
+import './i18n.ts';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import { Provider } from 'react-redux';
 import { store } from 'src/app/store/store.ts';
-import '../public/i18n';
 import App from './App.tsx';
 import './styles/globals.scss';
 

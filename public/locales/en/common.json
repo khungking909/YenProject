@@ -1,0 +1,110 @@
+{
+  "home": "Home",
+  "product": "Product",
+  "news": "News",
+  "contact": "Contact",
+  "outstanding": "Outstanding",
+  "search_placeholder": "Search...",
+  "newletter": {
+    "title": "SUBSCRIBE TO NEWSLETTER",
+    "placeholder": "Enter your email address",
+    "button": "Subscribe"
+  },
+  "feature_products": {
+    "about": "About us",
+    "description": "We believe that health is the foundation of happiness. Therefore, we are committed to providing high-quality, safe, nutritious products, combining selected natural ingredients and advanced technology. With the criteria of \"Quantity + Quality\", we are transparent about the origin, publicly test nutrition and comply with international standards. Each jar of bird's nest is not only food, but also a treasure for the health of you and your family."
+  },
+  "successfully": "Successfully",
+  "footer": {
+    "description": "We have what you need for your health.",
+    "menu": {
+      "home": "Home",
+      "help": "Help",
+      "company": "company",
+      "contact": "Contact"
+    }
+  },
+  "products": {
+    "casual": "Casual",
+    "sort_by": "Filter",
+    "sort_by_options": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "price_asc": "Price: Low to High",
+      "price_desc": "Price: High to Low"
+    },
+    "faq": "No questions yet 😊😊😊",
+    "add_to_cart": "Add to cart",
+    "like": "Like",
+    "color": "Color",
+    "size": "Size",
+    "description": "Description",
+    "review": "Review",
+    "reviews": {
+      "title": "Reviews",
+      "write_review": "Write a review",
+      "review": "Review",
+      "all_reviews": "All reviews"
+    },
+    "suggestions": "You might also like"
+  },
+  "carts": {
+    "cart": "Cart",
+    "your_cart": "Your cart",
+    "total": "Total",
+    "order_summary": "Order summary",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "delivery_fee": "Delivery Fee",
+    "discount_apply": "Apply",
+    "discount_code": "Add promo code",
+    "checkout": "Go to Checkout",
+    "free_shipping": "Free",
+    "coupon_code": "Coupon code",
+    "add_cart_success": "Added {{name}} to cart"
+  },
+  "users": {
+    "sign_out": "SignOut",
+    "profile": "Profile",
+    "settings": "Settings",
+    "Messages": "Messages",
+    "view_profile": "View Profile",
+    "subscription": "Subscription",
+    "support": "Support",
+    "community": "Community"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "password": "Password must be at least 6 characters",
+    "password_confirm": "Password does not match",
+    "minLength": "{{field}} at least {{length}} characters",
+    "maxLength": "{{field}} at most {{length}} characters",
+    "valid": "{{field}} only contain letters, numbers and underscores",
+    "regex": {
+      "uppercase": "{{field}} must contain at least one uppercase letter",
+      "lowercase": "{{field}} must contain at least one lowercase letter",
+      "number": "{{field}} must contain at least one number",
+      "special_character": "{{field}} must contain at least one special character"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "button": "Login",
+    "forgot_password": "Forgot password?",
+    "register": "Register",
+    "sign_in": "Sign in",
+    "not_account": "Don't have an account?",
+    "description": "The Sign In function allows users to log in to the system using email/phone number and password.",
+    "login_success": "Login successful",
+    "login_failed": "Login failed",
+    "login_error": "Login error",
+    "notification": {
+      "title": "Notification",
+      "message": "Login error. Please try again later."
+    }
+  }
+}
