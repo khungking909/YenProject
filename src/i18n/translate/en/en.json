@@ -94,6 +94,8 @@
     "password": "Password",
     "button": "Login",
     "forgot_password": "Forgot password?",
-    "register": "Register"
+    "register": "Register",
+    "sign_in": "Sign in",
+    "not_account": "Don't have an account?"
   }
 }

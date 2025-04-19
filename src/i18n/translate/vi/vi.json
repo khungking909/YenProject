@@ -92,6 +92,9 @@
     "username": "Tên đăng nhập",
     "email": "Email",
     "password": "Mật khẩu",
-    "button": "Đăng nhập"
+    "button": "Đăng nhập",
+    "sign_in": "Đăng nhập",
+    "sign_up": "Đăng ký",
+    "not_account": "Chưa có tài khoản?"
   }
 }

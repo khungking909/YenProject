@@ -114,10 +114,10 @@ export default function SignIn() {
             justifyContent="flex-end"
             pb={isMobile ? Setting.DIGIT_16 : Setting.DIGIT_32}
           >
-            <Typography>Don't have an account yet</Typography>
+            <Typography>{t('login.not_account')}</Typography>
             <Box>
               <Button outline size={'xSmall'} roundness="pill">
-                Sign Up
+                {t('login.sign_up')}
               </Button>
             </Box>
           </Box>
