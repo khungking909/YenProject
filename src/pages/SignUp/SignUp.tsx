@@ -1,3 +1,5 @@
+/* eslint-disable @cspell/spellchecker */
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Box } from '@components/Atom/Box';
 import { Button } from '@components/Atom/Button';
 import { Form } from '@components/Atom/Form';
@@ -13,11 +15,12 @@ import { signUpSchema } from '@pages/SignUp/schema';
 import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from 'src/app/apis/authApi';
 import { useToast } from 'src/app/slices/toastSlice/toastSelector';
 import { capitalizeFirstLetter } from 'src/common/untils/capitalizeFirstLetter';
 import { getIsMobile } from 'src/common/untils/isMobile';
+import { ScreenPath } from 'src/constants/screen';
 import { Setting } from 'src/constants/setting';
 
 export default function SignUp() {
@@ -56,18 +59,26 @@ export default function SignUp() {
 
       navigation('/');
     } catch (error) {
-      if ((error as { status: number }).status === 404) {
+      if ((error as { status: number }).status === 409) {
         onShowToast({
-          message: t('login.register_fail'),
+          message: t('login.existing_account'),
           title: t('login.notification.title'),
           duration: 3000,
           position: 'top-right',
           type: 'warning',
         });
       }
+
+      onShowToast({
+        message: t('login.server_error'),
+        title: t('login.notification.title'),
+        duration: 3000,
+        position: 'top-right',
+        type: 'error',
+      });
     }
 
-    reset({ [signUpConstant.passwordField]: '' });
+    reset({ [signUpConstant.passwordField]: '', [signUpConstant.confirmField]: '' });
   };
 
   return (
@@ -115,11 +126,13 @@ export default function SignUp() {
             justifyContent="flex-end"
             pb={isMobile ? Setting.DIGIT_16 : Setting.DIGIT_32}
           >
-            <Typography>{t('login.not_account')}</Typography>
+            <Typography>{t('login.have_account')}</Typography>
             <Box>
-              <Button outline size={'xSmall'} roundness="pill">
-                {t('login.sign_up')}
-              </Button>
+              <Link to={ScreenPath.SIGN_IN}>
+                <Button outline size={'xSmall'} roundness="pill">
+                  {t('login.sign_in')}
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" justifyContent="center">

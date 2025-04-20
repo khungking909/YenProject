@@ -1,3 +1,5 @@
+/* eslint-disable @cspell/spellchecker */
+/* eslint-disable sonarjs/no-duplicate-string */
 import { Box } from '@components/Atom/Box';
 import { Button } from '@components/Atom/Button';
 import { Form } from '@components/Atom/Form';
@@ -58,13 +60,21 @@ export default function SignIn() {
     } catch (error) {
       if ((error as { status: number }).status === 404) {
         onShowToast({
-          message: t('login.login_fail'),
+          message: t('login.login_failed'),
           title: t('login.notification.title'),
           duration: 3000,
           position: 'top-right',
-          type: 'warning',
+          type: 'error',
         });
       }
+
+      onShowToast({
+        message: t('login.server_error'),
+        title: t('login.notification.title'),
+        duration: 3000,
+        position: 'top-right',
+        type: 'error',
+      });
     }
 
     reset({ [signInConstant.passwordField]: '' });

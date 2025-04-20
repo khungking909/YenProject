@@ -14,7 +14,9 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import authApi from 'src/app/apis/authApi';
 import { removeUser } from 'src/app/slices/authSlice/authSlice';
+import { useToast } from 'src/app/slices/toastSlice/toastSelector';
 import { getIsMobile } from 'src/common/untils/isMobile';
+import { ScreenPath } from 'src/constants/screen';
 import { Setting } from 'src/constants/setting';
 
 const UserDropdown = ({ name, avatar, email }: Readonly<UserDropdownProps>) => {
@@ -23,13 +25,22 @@ const UserDropdown = ({ name, avatar, email }: Readonly<UserDropdownProps>) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { onShowToast } = useToast();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     dispatch(authApi.util.resetApiState());
     dispatch(removeUser());
     document.body.style.overflow = '';
-    navigate('/login');
+    navigate(ScreenPath.SIGN_IN);
+
+    onShowToast({
+      message: t('login.logout_success'),
+      title: t('login.notification.title'),
+      duration: 3000,
+      position: 'top-right',
+      type: 'info',
+    });
   };
 
   return (

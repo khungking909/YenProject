@@ -140,20 +140,12 @@ const Footer = () => {
               title={t('footer.menu.home').toUpperCase()}
               items={[
                 {
-                  name: 'Home',
+                  name: t('footer.menu.home'),
                   url: '/',
                 },
                 {
-                  name: 'About',
-                  url: '/about',
-                },
-                {
-                  name: 'Services',
+                  name: t('footer.menu.services'),
                   url: '/services',
-                },
-                {
-                  name: 'Contact',
-                  url: '/contact',
                 },
               ]}
             />
@@ -161,20 +153,16 @@ const Footer = () => {
               title={t('footer.menu.help').toUpperCase()}
               items={[
                 {
-                  name: 'Home',
-                  url: '/',
-                },
-                {
-                  name: 'About',
+                  name: t('footer.menu.about'),
                   url: '/about',
                 },
                 {
-                  name: 'Services',
-                  url: '/services',
+                  name: t('footer.menu.contact'),
+                  url: '/contact',
                 },
                 {
-                  name: 'Contact',
-                  url: '/contact',
+                  name: 'FAQ',
+                  url: '/faq',
                 },
               ]}
             />
@@ -182,20 +170,24 @@ const Footer = () => {
               title={t('footer.menu.company').toUpperCase()}
               items={[
                 {
-                  name: 'Home',
-                  url: '/',
+                  name: t('footer.menu.introduce'),
+                  url: '/introduce',
                 },
                 {
-                  name: 'About',
-                  url: '/about',
+                  name: t('footer.menu.personnel'),
+                  url: '/personnel',
                 },
                 {
-                  name: 'Services',
-                  url: '/services',
+                  name: t('footer.menu.terms'),
+                  url: '/terms-of-use',
                 },
                 {
-                  name: 'Contact',
-                  url: '/contact',
+                  name: t('footer.menu.blog'),
+                  url: '/blog',
+                },
+                {
+                  name: t('footer.menu.privacy'),
+                  url: '/privacy-policy',
                 },
               ]}
             />
@@ -203,20 +195,12 @@ const Footer = () => {
               title={t('footer.menu.contact').toUpperCase()}
               items={[
                 {
-                  name: 'Home',
-                  url: '/',
+                  name: '71/22 Nguyễn Tri Phương',
+                  url: '#',
                 },
                 {
-                  name: 'About',
-                  url: '/about',
-                },
-                {
-                  name: 'Services',
-                  url: '/services',
-                },
-                {
-                  name: 'Contact',
-                  url: '/contact',
+                  name: '📞0349002395',
+                  url: '#',
                 },
               ]}
             />

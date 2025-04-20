@@ -21,7 +21,14 @@
       "home": "Home",
       "help": "Help",
       "company": "company",
-      "contact": "Contact"
+      "contact": "Contact",
+      "about": "About us",
+      "services": "Services",
+      "introduce": "Introduce",
+      "personnel": "Personnel",
+      "terms": "Terms of Service",
+      "blog": "Blog",
+      "privacy": "Privacy Policy"
     }
   },
   "products": {
@@ -100,17 +107,21 @@
     "register": "Register",
     "sign_in": "Sign in",
     "not_account": "Don't have an account?",
+    "have_account": "Already have an account?",
     "description": "The Sign In function allows users to log in to the system using email/phone number and password.",
     "login_success": "Login successful",
-    "login_failed": "Login failed",
+    "login_failed": "Username or password is incorrect",
     "login_error": "Login error",
     "login_other": "or",
     "register_success": "Register successful",
     "register_failed": "Register failed",
     "register_error": "Register error",
+    "logout_success": "Logged out",
     "notification": {
       "title": "Notification",
       "message": "Login error. Please try again later."
-    }
+    },
+    "existing_account": "Account already exists!!!",
+    "server_error": "Server error. Please try again later."
   }
 }

@@ -13,6 +13,7 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+
           localStorage.setItem('token', data.token);
 
           dispatch(authApi.util.invalidateTags(['User']));
@@ -28,7 +29,7 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
-      invalidatesTags: ['Token'],
+      invalidatesTags: ['Register'],
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;

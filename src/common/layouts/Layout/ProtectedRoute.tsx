@@ -3,9 +3,9 @@ import { useGetUserFromTokenQuery } from 'src/app/apis/authApi';
 import { ScreenPath } from 'src/constants/screen';
 
 const ProtectedRoute = () => {
-  const { data: user } = useGetUserFromTokenQuery();
+  const { data: user, isLoading } = useGetUserFromTokenQuery();
 
-  return user ? <Outlet /> : <Navigate to={ScreenPath.SIGN_IN} />;
+  return user && !isLoading ? <Outlet /> : <Navigate to={ScreenPath.SIGN_IN} />;
 };
 
 export default ProtectedRoute;

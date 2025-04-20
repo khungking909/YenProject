@@ -195,7 +195,7 @@ const Header = () => {
               onClick={openModal}
             />
           ) : (
-            <Link to={ScreenPath.LOGIN}>
+            <Link to={ScreenPath.SIGN_IN}>
               <Login
                 size={
                   getValueFromBreakpoint(responsive, {

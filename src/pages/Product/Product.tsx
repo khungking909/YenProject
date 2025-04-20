@@ -258,7 +258,7 @@ export default function Product() {
           <Pagination
             activePage={activePage}
             setActivePage={setActivePage}
-            totalPages={30}
+            totalPages={Math.ceil(data.length / Setting.LIMIT_PRODUCT)}
             roundness="circle"
             color="success"
             nextPrevButton

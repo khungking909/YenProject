@@ -44,10 +44,11 @@ const signUpSchema = (t: TFunction) =>
             field: capitalizeFirstLetter(t(`login.${signUpConstant.passwordField}`)),
           }),
         ),
+      [signUpConstant.confirmField]: formValidation.string(),
     })
     .refine((data) => data[signUpConstant.passwordField] === data[signUpConstant.confirmField], {
       message: t('login.not_match'),
-      path: ['confirm'],
+      path: [signUpConstant.confirmField],
     });
 
 export { signUpSchema };
