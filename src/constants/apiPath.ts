@@ -1,3 +1,3 @@
 export const apiPath = {
-  host: 'http://localhost:1234/api',
+  host: 'https://yen-backend.vercel.app/api',
 };

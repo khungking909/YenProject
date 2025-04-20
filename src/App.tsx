@@ -28,8 +28,6 @@ i18n
   });
 
 const AppComponent = () => {
-  console.log('AppComponent render');
-
   const dispatch = useDispatch();
   const { data, isSuccess } = useGetUserFromTokenQuery();
 
