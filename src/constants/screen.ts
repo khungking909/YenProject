@@ -5,7 +5,6 @@ export enum ScreenId {
 export enum ScreenPath {
   HOME = '/',
   PRODUCT = '/products',
-  LOGIN = '/login',
   CART = '/cart',
   PRODUCT_DETAIL = '/product/:slug',
   SIGN_IN = '/sign-in',

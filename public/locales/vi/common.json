@@ -93,16 +93,23 @@
     "username": "Tên đăng nhập",
     "email": "Email",
     "password": "Mật khẩu",
+    "password_confirm": "Xác nhận mật khẩu",
+    "not_match": "Mật khẩu không khớp",
     "button": "Đăng nhập",
     "sign_in": "Đăng nhập",
+    "register": "Đăng ký",
     "sign_up": "Đăng ký",
     "not_account": "Chưa có tài khoản?",
     "description": "Chức năng đăng nhập cho phép người dùng đăng nhập vào hệ thống bằng email/số điện thoại và mật khẩu",
     "login_success": "Đăng nhập thành công",
     "login_failed": "Đăng nhập thất bại",
     "login_error": "Đã xảy ra lỗi trong quá trình đăng nhập. Vui lòng thử lại sau.",
+    "register_success": "Đăng ký thành công",
+    "register_failed": "Đăng ký thất bại",
+    "register_error": "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại sau.",
     "notification": {
       "title": "Thông báo"
-    }
+    },
+    "login_other": "hoặc"
   }
 }

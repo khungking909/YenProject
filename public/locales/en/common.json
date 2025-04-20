@@ -93,6 +93,8 @@
     "username": "Username",
     "email": "Email",
     "password": "Password",
+    "password_confirm": "Confirm Password",
+    "not_match": "Password does not match",
     "button": "Login",
     "forgot_password": "Forgot password?",
     "register": "Register",
@@ -102,6 +104,10 @@
     "login_success": "Login successful",
     "login_failed": "Login failed",
     "login_error": "Login error",
+    "login_other": "or",
+    "register_success": "Register successful",
+    "register_failed": "Register failed",
+    "register_error": "Register error",
     "notification": {
       "title": "Notification",
       "message": "Login error. Please try again later."

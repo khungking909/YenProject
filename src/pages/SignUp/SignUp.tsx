@@ -8,25 +8,25 @@ import { Input } from '@components/Atom/Input';
 import { Typography } from '@components/Atom/Typography';
 import { zodResolver } from '@hookform/resolvers/zod';
 import useScreenSize from '@hooks/useScreenSize';
-import { signInConstant } from '@pages/SignIn/constant';
-import { signInSchema } from '@pages/SignIn/schema';
+import { signUpConstant } from '@pages/SignUp/constant';
+import { signUpSchema } from '@pages/SignUp/schema';
 import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from 'src/app/apis/authApi';
+import { useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from 'src/app/apis/authApi';
 import { useToast } from 'src/app/slices/toastSlice/toastSelector';
 import { capitalizeFirstLetter } from 'src/common/untils/capitalizeFirstLetter';
 import { getIsMobile } from 'src/common/untils/isMobile';
-import { ScreenPath } from 'src/constants/screen';
 import { Setting } from 'src/constants/setting';
 
-export default function SignIn() {
+export default function SignUp() {
   const responsive = useScreenSize();
   const isMobile = getIsMobile(responsive);
   const { t } = useTranslation();
-  const [login] = useLoginMutation();
+  const [userRegister] = useRegisterMutation();
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const navigation = useNavigate();
   const { onShowToast } = useToast();
 
@@ -36,18 +36,18 @@ export default function SignIn() {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(signInSchema(t)),
+    resolver: zodResolver(signUpSchema(t)),
   });
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      await login({
-        username: data[signInConstant.usernameField],
-        password: data[signInConstant.passwordField],
+      await userRegister({
+        username: data[signUpConstant.usernameField],
+        password: data[signUpConstant.passwordField],
       }).unwrap();
 
       onShowToast({
-        message: t('login.login_success'),
+        message: t('login.register_success'),
         title: t('login.notification.title'),
         duration: 3000,
         position: 'top-right',
@@ -58,7 +58,7 @@ export default function SignIn() {
     } catch (error) {
       if ((error as { status: number }).status === 404) {
         onShowToast({
-          message: t('login.login_fail'),
+          message: t('login.register_fail'),
           title: t('login.notification.title'),
           duration: 3000,
           position: 'top-right',
@@ -67,7 +67,7 @@ export default function SignIn() {
       }
     }
 
-    reset({ [signInConstant.passwordField]: '' });
+    reset({ [signUpConstant.passwordField]: '' });
   };
 
   return (
@@ -89,13 +89,13 @@ export default function SignIn() {
         m="0 auto"
         display="flex"
         backgroundImage={{
-          url: isMobile ? signInConstant.image : '',
+          url: isMobile ? signUpConstant.image : '',
         }}
         borderRadius={Setting.DIGIT_16}
       >
         {!isMobile && (
           <Box flexShrink={0} width="30%">
-            <Image src={signInConstant.image} />
+            <Image src={signUpConstant.image} />
           </Box>
         )}
         <Box
@@ -117,11 +117,9 @@ export default function SignIn() {
           >
             <Typography>{t('login.not_account')}</Typography>
             <Box>
-              <Link to={ScreenPath.SIGN_UP}>
-                <Button outline size={'xSmall'} roundness="pill">
-                  {t('login.sign_up')}
-                </Button>
-              </Link>
+              <Button outline size={'xSmall'} roundness="pill">
+                {t('login.sign_up')}
+              </Button>
             </Box>
           </Box>
           <Box display="flex" alignItems="center" justifyContent="center">
@@ -177,8 +175,8 @@ export default function SignIn() {
                     <Input
                       variant="rounded"
                       outline
-                      {...register(signInConstant.usernameField)}
-                      errorMessage={errors[signInConstant.usernameField]?.message}
+                      {...register(signUpConstant.usernameField)}
+                      errorMessage={errors[signUpConstant.usernameField]?.message}
                     />
                   </Box>
                   <Box
@@ -193,10 +191,10 @@ export default function SignIn() {
                     <Input
                       variant="rounded"
                       outline
-                      {...register(signInConstant.passwordField)}
+                      {...register(signUpConstant.passwordField)}
                       type={isShowPassword ? 'text' : 'password'}
-                      errorMessage={errors[signInConstant.passwordField]?.message}
-                      autoComplete={signInConstant.passwordField}
+                      errorMessage={errors[signUpConstant.passwordField]?.message}
+                      autoComplete={signUpConstant.passwordField}
                       suffix={
                         isShowPassword ? (
                           <View size="large" color="gray-500" />
@@ -207,22 +205,37 @@ export default function SignIn() {
                       onClickSuffix={() => setIsShowPassword(!isShowPassword)}
                     />
                   </Box>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap={{
+                      xs: 4,
+                      md: 6,
+                    }}
+                  >
+                    <Typography fontSize={isMobile ? 'xs' : 'sm'}>{t('login.password_confirm')}</Typography>
+                    <Input
+                      variant="rounded"
+                      outline
+                      {...register(signUpConstant.confirmField)}
+                      type={isShowConfirmPassword ? 'text' : 'password'}
+                      errorMessage={errors[signUpConstant.confirmField]?.message}
+                      autoComplete={signUpConstant.confirmField}
+                      suffix={
+                        isShowConfirmPassword ? (
+                          <View size="large" color="gray-500" />
+                        ) : (
+                          <EyeClose size="large" color="gray-500" />
+                        )
+                      }
+                      onClickSuffix={() => setIsShowConfirmPassword(!isShowConfirmPassword)}
+                    />
+                  </Box>
                   <Button color="success" fullWidth roundness="pill" type="submit">
-                    {capitalizeFirstLetter(signInConstant.loginButton)}
+                    {capitalizeFirstLetter(t('login.register'))}
                   </Button>
                 </Box>
               </Form>
-              <Typography fontSize={isMobile ? 'sm' : 'base'}>
-                {capitalizeFirstLetter(t('login.login_other'))}
-              </Typography>
-              <Box display="flex" flexDirection="column" gap={Setting.DIGIT_8}>
-                <Button color="dark" fullWidth roundness="pill">
-                  Google
-                </Button>
-                <Button color="info" fullWidth roundness="pill">
-                  Facebook
-                </Button>
-              </Box>
             </Box>
           </Box>
         </Box>

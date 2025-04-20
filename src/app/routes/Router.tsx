@@ -2,6 +2,7 @@ import { Home } from '@pages/Home';
 import Product from '@pages/Product/Product';
 import { ProductDetail } from '@pages/ProductDetail';
 import SignIn from '@pages/SignIn/SignIn';
+import SignUp from '@pages/SignUp/SignUp';
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from 'src/common/layouts';
@@ -40,7 +41,11 @@ const router = createBrowserRouter(
         },
         {
           element: <SignIn />,
-          path: ScreenPath.LOGIN,
+          path: ScreenPath.SIGN_IN,
+        },
+        {
+          element: <SignUp />,
+          path: ScreenPath.SIGN_UP,
         },
       ],
     },
