@@ -4,6 +4,7 @@ import { Typography, TypographyProps } from '@components/Atom/Typography';
 import { Navigation } from '@components/Molecules/Navigation';
 import useScreenSize from '@hooks/useScreenSize';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getValueFromBreakpoint } from 'src/common/untils/getValueFromBreakpoint';
 import { getIsMobile } from 'src/common/untils/isMobile';
 import { Setting } from 'src/constants/setting';
@@ -78,7 +79,9 @@ const CategoryCarousel = ({ outstandingList = [], title }: CategoryCarouselProps
       >
         {outstandingList.map((item) => (
           <SwiperSlide key={item.name} className={categoryCarouselModuleClass['swiper__slide']}>
-            <OutstandingCard zoomScale name={item.name} image={item.image} />
+            <Link to={`/product/${item.slug}`} key={item.name}>
+              <OutstandingCard zoomScale name={item.name} image={item.image} />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -7,6 +7,7 @@ import { Gift } from '@components/Atom/Icon/icons/Gift';
 import { Input } from '@components/Atom/Input';
 import { Typography } from '@components/Atom/Typography';
 import { CartCard } from '@components/Molecules/CartCard';
+import { Loading } from '@components/Organism/Loading';
 import { zodResolver } from '@hookform/resolvers/zod';
 import useScreenSize from '@hooks/useScreenSize';
 import { couponSchema } from '@pages/Cart/schema';
@@ -29,7 +30,11 @@ export default function CartPage() {
   const { t } = useTranslation();
   const responsive = useScreenSize();
   const isMobile = getIsMobile(responsive);
-  const { data: carts = { items: [], totalPrice: 0, totalQuantity: 0 } } = useGetCartsQuery();
+  const {
+    data: carts = { items: [], totalPrice: 0, totalQuantity: 0 },
+    isLoading,
+    isFetching,
+  } = useGetCartsQuery();
   const [fetchCoupon, { data: coupon }] = useLazyGetCouponByCodeQuery();
   const [couponCodeError, setCouponCodeError] = useState<string | null>(null);
   const [removeItem] = useRemoveItemFromCartMutation();
@@ -135,38 +140,42 @@ export default function CartPage() {
             width={isMobile ? '100%' : '60%'}
             flexGrow={0}
           >
-            <Box
-              p={{
-                sm: Setting.DIGIT_16,
-                md: Setting.DIGIT_24,
-              }}
-              gap={{
-                sm: Setting.DIGIT_16,
-                md: Setting.DIGIT_24,
-              }}
-              display="flex"
-              flexDirection="column"
-              width="100%"
-            >
-              {carts.items.map((cart, index) => (
-                <Box key={cart.id}>
-                  <CartCard
-                    image={cart.image}
-                    name={cart.name}
-                    color={cart.color}
-                    size={cart.size}
-                    price={cart.price}
-                    quantity={cart.quantity}
-                    stock={cart.stock}
-                    onRemove={() => onRemoveItem(cart.id)}
-                    onChangeQuantity={(quantity) => onUpdateItem(cart.id, quantity)}
-                  />
-                  {index + 1 !== carts.items.length && (
-                    <Box width="100%" height={2} backgroundColor={'#d2caca'}></Box>
-                  )}
-                </Box>
-              ))}
-            </Box>
+            {isLoading || isFetching ? (
+              <Loading loadingType="dots" />
+            ) : (
+              <Box
+                p={{
+                  sm: Setting.DIGIT_16,
+                  md: Setting.DIGIT_24,
+                }}
+                gap={{
+                  sm: Setting.DIGIT_16,
+                  md: Setting.DIGIT_24,
+                }}
+                display="flex"
+                flexDirection="column"
+                width="100%"
+              >
+                {carts.items.map((cart, index) => (
+                  <Box key={cart.id}>
+                    <CartCard
+                      image={cart.image}
+                      name={cart.name}
+                      color={cart.color}
+                      size={cart.size}
+                      price={cart.price}
+                      quantity={cart.quantity}
+                      stock={cart.stock}
+                      onRemove={() => onRemoveItem(cart.id)}
+                      onChangeQuantity={(quantity) => onUpdateItem(cart.id, quantity)}
+                    />
+                    {index + 1 !== carts.items.length && (
+                      <Box width="100%" height={2} backgroundColor={'#d2caca'}></Box>
+                    )}
+                  </Box>
+                ))}
+              </Box>
+            )}
           </Box>
           <Box
             border={{

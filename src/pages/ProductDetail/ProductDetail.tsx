@@ -14,6 +14,7 @@ import { ProductLoop } from '@components/Molecules/ProductLoop';
 import { ReviewCard } from '@components/Molecules/ReviewCard';
 import { TabPanel } from '@components/Molecules/TabPanel';
 import { Carousel } from '@components/Organism/Carousel';
+import { Loading } from '@components/Organism/Loading';
 import useScreenSize from '@hooks/useScreenSize';
 import { Description } from '@pages/ProductDetail/components/Description';
 import { Review } from '@pages/ProductDetail/components/Review';
@@ -39,7 +40,7 @@ export default function ProductDetail() {
   const TAB_LIST = [t('products.description'), t('products.review'), 'FQAs'];
   const { data: productsData } = useGetProductsQuery();
   const data = Array.isArray(productsData) ? productsData : [];
-  const { data: productData } = useGetProductByIdQuery(params.slug ?? '');
+  const { data: productData, isLoading, isFetching } = useGetProductByIdQuery(params.slug ?? '');
   const [activeSize, setActiveSize] = useState('');
   const [activeColor, setActiveColor] = useState('');
   const [addCartItem] = useAddCartItemMutation();
@@ -119,95 +120,86 @@ export default function ProductDetail() {
         md: Setting.DIGIT_80,
       }}
     >
-      <Box width={isMobile ? Setting.WIDTH_SP : Setting.WIDTH_PC} m="0 auto">
-        <Box width="100%" backgroundColor="#576574" height={2}></Box>
-        <Box p={isMobile ? '16px 0' : '24px 0'} cursor="pointer">
-          <BreadCrumb>
-            <Link to={ScreenPath.HOME}>
-              <Typography variant="text" color="gray">
-                {t('home')}
-              </Typography>
-            </Link>
-            <Link to={ScreenPath.PRODUCT}>
-              <Typography variant="text" color="gray">
-                {t('product')}
-              </Typography>
-            </Link>
-            <Link to="/product/1">
-              <Typography variant="text" color="black" fontWeight="semibold">
-                {productData?.category}
-              </Typography>
-            </Link>
-          </BreadCrumb>
-        </Box>
-        <Box
-          width="100%"
-          display="flex"
-          flexDirection={isMobile ? 'column' : 'row'}
-          gap={{
-            sm: Setting.DIGIT_16,
-            md: Setting.DIGIT_32,
-            lg: Setting.DIGIT_40,
-          }}
-          pb={{
-            sm: Setting.DIGIT_40,
-            md: Setting.DIGIT_80,
-          }}
-        >
+      {isLoading || isFetching ? (
+        <Loading loadingType="dots" />
+      ) : (
+        <Box width={isMobile ? Setting.WIDTH_SP : Setting.WIDTH_PC} m="0 auto">
+          <Box width="100%" backgroundColor="#576574" height={2}></Box>
+          <Box p={isMobile ? '16px 0' : '24px 0'} cursor="pointer">
+            <BreadCrumb>
+              <Link to={ScreenPath.HOME}>
+                <Typography variant="text" color="gray">
+                  {t('home')}
+                </Typography>
+              </Link>
+              <Link to={ScreenPath.PRODUCT}>
+                <Typography variant="text" color="gray">
+                  {t('product')}
+                </Typography>
+              </Link>
+              <Link to="/product/1">
+                <Typography variant="text" color="black" fontWeight="semibold">
+                  {productData?.category}
+                </Typography>
+              </Link>
+            </BreadCrumb>
+          </Box>
+
           <Box
-            flexShrink={Setting.DIGIT_0}
-            width={isMobile ? '100%' : '50%'}
+            width="100%"
             display="flex"
             flexDirection={isMobile ? 'column' : 'row'}
-          >
-            <ProductLoop
-              imageList={productData?.images ?? []}
-              direction={isMobile ? 'vertical' : 'horizontal'}
-            />
-          </Box>
-          <Box
-            flexGrow={Setting.DIGIT_1}
-            display="flex"
-            flexDirection="column"
             gap={{
               sm: Setting.DIGIT_16,
-              md: Setting.DIGIT_24,
+              md: Setting.DIGIT_32,
+              lg: Setting.DIGIT_40,
+            }}
+            pb={{
+              sm: Setting.DIGIT_40,
+              md: Setting.DIGIT_80,
             }}
           >
-            <Box display="flex" flexDirection="column" gap={Setting.DIGIT_12}>
-              <Typography
-                variant={
-                  getValueFromBreakpoint(responsive, {
-                    sm: 'h5',
-                    md: 'h4',
-                  }) as TypographyProps['variant']
-                }
-              >
-                {productData?.name}
-              </Typography>
-              <Rating starValue={productData?.rating} />
-              <Box
-                display="flex"
-                alignItems="center"
-                gap={{
-                  xs: Setting.DIGIT_4,
-                  sm: Setting.DIGIT_8,
-                  md: Setting.DIGIT_12,
-                }}
-              >
+            <Box
+              flexShrink={Setting.DIGIT_0}
+              width={isMobile ? '100%' : '50%'}
+              display="flex"
+              flexDirection={isMobile ? 'column' : 'row'}
+            >
+              <ProductLoop
+                imageList={productData?.images ?? []}
+                direction={isMobile ? 'vertical' : 'horizontal'}
+              />
+            </Box>
+            <Box
+              flexGrow={Setting.DIGIT_1}
+              display="flex"
+              flexDirection="column"
+              gap={{
+                sm: Setting.DIGIT_16,
+                md: Setting.DIGIT_24,
+              }}
+            >
+              <Box display="flex" flexDirection="column" gap={Setting.DIGIT_12}>
                 <Typography
-                  fontSize={
+                  variant={
                     getValueFromBreakpoint(responsive, {
-                      xs: 'sm',
-                      sm: 'sm',
-                      md: 'base',
-                    }) as TypographyProps['fontSize']
+                      sm: 'h5',
+                      md: 'h4',
+                    }) as TypographyProps['variant']
                   }
-                  fontWeight="semibold"
                 >
-                  ${finalPrice(productData?.salePrice, Number(productData?.price)).toFixed(2)}
+                  {productData?.name}
                 </Typography>
-                {productData?.salePrice && (
+                <Rating starValue={productData?.rating} />
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap={{
+                    xs: Setting.DIGIT_4,
+                    sm: Setting.DIGIT_8,
+                    md: Setting.DIGIT_12,
+                  }}
+                >
                   <Typography
                     fontSize={
                       getValueFromBreakpoint(responsive, {
@@ -216,203 +208,217 @@ export default function ProductDetail() {
                         md: 'base',
                       }) as TypographyProps['fontSize']
                     }
-                    color="gray"
-                    textDecoration="line-through"
+                    fontWeight="semibold"
                   >
-                    ${Number(productData?.price)?.toFixed(2)}
+                    ${finalPrice(productData?.salePrice, Number(productData?.price)).toFixed(2)}
                   </Typography>
-                )}
-                <Badge color="danger" size={saleBadgeSize} roundness="pill">
-                  -
-                  {salePriceValue(productData?.salePrice, Number(productData?.price))?.toFixed(0) +
-                    Setting.PERCENTAGE_SYMBOL}
-                </Badge>
-              </Box>
-            </Box>
-            <Box pb={Setting.DIGIT_8}>
-              <Typography fontSize={isMobile ? 'sm' : 'base'} color="gray">
-                {productData?.shortDescription}
-              </Typography>
-            </Box>
-            <Box width="100%" backgroundColor="gray" height={1}></Box>
-            <Box
-              display="inline-flex"
-              justifyContent="center"
-              width="100%"
-              flexDirection={'column'}
-              gap={{
-                sm: Setting.DIGIT_12,
-                md: Setting.DIGIT_16,
-              }}
-            >
-              <Box
-                display="inline-flex"
-                flexDirection="column"
-                width="max-content"
-                gap={{
-                  sm: Setting.DIGIT_12,
-                  md: Setting.DIGIT_16,
-                }}
-              >
-                <Typography fontSize="sm" color="gray">
-                  {t('products.color')}
-                </Typography>
-                <Box
-                  display="flex"
-                  width="max-content"
-                  gap={{
-                    sm: Setting.DIGIT_12,
-                    md: Setting.DIGIT_16,
-                  }}
-                >
-                  {productData?.color.map((color) => (
-                    <SwatchesColor
-                      key={color.name}
-                      color={color.name}
-                      onClick={() => setActiveColor(color.name)}
-                      active={activeColor === color.name}
-                    />
-                  ))}
+                  {productData?.salePrice && (
+                    <Typography
+                      fontSize={
+                        getValueFromBreakpoint(responsive, {
+                          xs: 'sm',
+                          sm: 'sm',
+                          md: 'base',
+                        }) as TypographyProps['fontSize']
+                      }
+                      color="gray"
+                      textDecoration="line-through"
+                    >
+                      ${Number(productData?.price)?.toFixed(2)}
+                    </Typography>
+                  )}
+                  <Badge color="danger" size={saleBadgeSize} roundness="pill">
+                    -
+                    {salePriceValue(productData?.salePrice, Number(productData?.price))?.toFixed(0) +
+                      Setting.PERCENTAGE_SYMBOL}
+                  </Badge>
                 </Box>
               </Box>
+              <Box pb={Setting.DIGIT_8}>
+                <Typography fontSize={isMobile ? 'sm' : 'base'} color="gray">
+                  {productData?.shortDescription}
+                </Typography>
+              </Box>
+              <Box width="100%" backgroundColor="gray" height={1}></Box>
               <Box
+                display="inline-flex"
+                justifyContent="center"
                 width="100%"
-                height={1}
-                backgroundColor="gray"
-                m={{
-                  sm: '6px 0',
-                  md: '12px 0',
-                }}
-              ></Box>
-              <Box
-                display="inline-flex"
-                flexDirection="column"
-                width="max-content"
+                flexDirection={'column'}
                 gap={{
                   sm: Setting.DIGIT_12,
                   md: Setting.DIGIT_16,
                 }}
               >
-                <Typography fontSize="sm" color="gray">
-                  {t('products.size')}
-                </Typography>
                 <Box
-                  display="flex"
+                  display="inline-flex"
+                  flexDirection="column"
                   width="max-content"
                   gap={{
                     sm: Setting.DIGIT_12,
                     md: Setting.DIGIT_16,
                   }}
                 >
-                  {productData?.size.map((size) => (
-                    <SwatchesSize
-                      key={size.name}
-                      sizeValue={size.name}
-                      onClick={() => setActiveSize(size.name)}
-                      active={activeSize === size.name}
-                    />
-                  ))}
+                  <Typography fontSize="sm" color="gray">
+                    {t('products.color')}
+                  </Typography>
+                  <Box
+                    display="flex"
+                    width="max-content"
+                    gap={{
+                      sm: Setting.DIGIT_12,
+                      md: Setting.DIGIT_16,
+                    }}
+                  >
+                    {productData?.color.map((color) => (
+                      <SwatchesColor
+                        key={color.name}
+                        color={color.name}
+                        onClick={() => setActiveColor(color.name)}
+                        active={activeColor === color.name}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+                <Box
+                  width="100%"
+                  height={1}
+                  backgroundColor="gray"
+                  m={{
+                    sm: '6px 0',
+                    md: '12px 0',
+                  }}
+                ></Box>
+                <Box
+                  display="inline-flex"
+                  flexDirection="column"
+                  width="max-content"
+                  gap={{
+                    sm: Setting.DIGIT_12,
+                    md: Setting.DIGIT_16,
+                  }}
+                >
+                  <Typography fontSize="sm" color="gray">
+                    {t('products.size')}
+                  </Typography>
+                  <Box
+                    display="flex"
+                    width="max-content"
+                    gap={{
+                      sm: Setting.DIGIT_12,
+                      md: Setting.DIGIT_16,
+                    }}
+                  >
+                    {productData?.size.map((size) => (
+                      <SwatchesSize
+                        key={size.name}
+                        sizeValue={size.name}
+                        onClick={() => setActiveSize(size.name)}
+                        active={activeSize === size.name}
+                      />
+                    ))}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box width="100%" backgroundColor="gray" height={1}></Box>
-            <Box
-              display="flex"
-              flexDirection={isMobile ? 'column' : 'row'}
-              gap={Setting.DIGIT_16}
-              flexWrap="wrap"
-            >
-              <QuantitySelector
-                quantity={Setting.DIGIT_1}
-                max={productData?.stock}
-                onChangeQuantity={(value) => setQuantity(value)}
-              />
-              <Button fullWidth={isMobile} roundness="pill" color="dark" onClick={handleAddToCart}>
-                {t('products.add_to_cart')}
-              </Button>
+              <Box width="100%" backgroundColor="gray" height={1}></Box>
+              <Box
+                display="flex"
+                flexDirection={isMobile ? 'column' : 'row'}
+                gap={Setting.DIGIT_16}
+                flexWrap="wrap"
+              >
+                <QuantitySelector
+                  quantity={Setting.DIGIT_1}
+                  max={productData?.stock}
+                  onChangeQuantity={(value) => setQuantity(value)}
+                />
+                <Button fullWidth={isMobile} roundness="pill" color="dark" onClick={handleAddToCart}>
+                  {t('products.add_to_cart')}
+                </Button>
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box display="flex" justifyContent="center" flexDirection="column" gap={Setting.DIGIT_24}>
-          <Tabs value={activeTab} onChangeTab={setActiveTab}>
-            {TAB_LIST.map((tab, index) => (
-              <TabItem key={tab} active={activeTab === index} title={tab} />
-            ))}
-          </Tabs>
-          <TabPanel tabPanelIndex={0} activeTab={activeTab}>
-            <Description />
-          </TabPanel>
-          <TabPanel tabPanelIndex={1} activeTab={activeTab}>
-            <Review>
-              {reviews.map((item) => (
-                <ReviewCard
-                  key={item.id}
-                  rate={item.rating}
-                  review={item.content}
-                  date={item.createdAt}
-                  image={item.User.avatar}
-                  name={item.User.username}
-                ></ReviewCard>
+          <Box display="flex" justifyContent="center" flexDirection="column" gap={Setting.DIGIT_24}>
+            <Tabs value={activeTab} onChangeTab={setActiveTab}>
+              {TAB_LIST.map((tab, index) => (
+                <TabItem key={tab} active={activeTab === index} title={tab} />
               ))}
-            </Review>
-          </TabPanel>
-          <TabPanel tabPanelIndex={2} activeTab={activeTab}>
-            <Typography textAlign="center">{t('products.faq')}</Typography>
-          </TabPanel>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          gap={{
-            sm: Setting.DIGIT_24,
-            md: Setting.DIGIT_32,
-          }}
-          pt={{
-            sm: Setting.DIGIT_16,
-            md: Setting.DIGIT_24,
-          }}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Typography variant={isMobile ? 'h5' : 'h3'} textAlign="center">
-            {t('products.suggestions').toUpperCase()}
-          </Typography>
-          <Box width="100%">
-            <Carousel
-              slidesPerView={Number(
-                getValueFromBreakpoint(responsive, {
-                  sm: Setting.DIGIT_2,
-                  md: Setting.DIGIT_4,
-                }),
-              )}
-              spaceBetween={Number(
-                getValueFromBreakpoint(responsive, {
-                  sm: Setting.DIGIT_8,
-                  md: Setting.DIGIT_16,
-                }),
-              )}
-              navigation={!isMobile}
-              navigationColor="info"
-            >
-              {data.map((item) => {
-                return (
-                  <Link to={`/product/${item.slug}`} key={item.id}>
-                    <ProductCard
-                      columns={4}
-                      image={item.images[0]}
-                      name={item.name}
-                      price={item.price}
-                      salePrice={item.salePrice}
-                      rate={item.rating}
-                      onClickAddToCart={() => handleAddToCartOutstanding(item)}
-                    />
-                  </Link>
-                );
-              })}
-            </Carousel>
+            </Tabs>
+            <TabPanel tabPanelIndex={0} activeTab={activeTab}>
+              <Description />
+            </TabPanel>
+            <TabPanel tabPanelIndex={1} activeTab={activeTab}>
+              <Review>
+                {reviews.map((item) => (
+                  <ReviewCard
+                    key={item.id}
+                    rate={item.rating}
+                    review={item.content}
+                    date={item.createdAt}
+                    image={item.User.avatar}
+                    name={item.User.username}
+                  ></ReviewCard>
+                ))}
+              </Review>
+            </TabPanel>
+            <TabPanel tabPanelIndex={2} activeTab={activeTab}>
+              <Typography textAlign="center">{t('products.faq')}</Typography>
+            </TabPanel>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            gap={{
+              sm: Setting.DIGIT_24,
+              md: Setting.DIGIT_32,
+            }}
+            pt={{
+              sm: Setting.DIGIT_16,
+              md: Setting.DIGIT_24,
+            }}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography variant={isMobile ? 'h5' : 'h3'} textAlign="center">
+              {t('products.suggestions').toUpperCase()}
+            </Typography>
+            <Box width="100%">
+              <Carousel
+                slidesPerView={Number(
+                  getValueFromBreakpoint(responsive, {
+                    sm: Setting.DIGIT_2,
+                    md: Setting.DIGIT_4,
+                  }),
+                )}
+                spaceBetween={Number(
+                  getValueFromBreakpoint(responsive, {
+                    sm: Setting.DIGIT_8,
+                    md: Setting.DIGIT_16,
+                  }),
+                )}
+                navigation={!isMobile}
+                navigationColor="info"
+              >
+                {data.map((item) => {
+                  return (
+                    <Link to={`/product/${item.slug}`} key={item.id}>
+                      <ProductCard
+                        columns={4}
+                        image={item.images[0]}
+                        name={item.name}
+                        price={item.price}
+                        salePrice={item.salePrice}
+                        rate={item.rating}
+                        onClickAddToCart={() => handleAddToCartOutstanding(item)}
+                      />
+                    </Link>
+                  );
+                })}
+              </Carousel>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 }

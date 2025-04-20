@@ -1,5 +1,6 @@
 export interface OutstandingProduct {
   readonly name: string;
+  readonly slug: string;
   readonly image: string;
 }
 

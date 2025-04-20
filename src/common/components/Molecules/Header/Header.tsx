@@ -114,12 +114,12 @@ const Header = () => {
                 {t('product')}
               </Typography>
             </Link>
-            <Link to="/news">
+            <Link to="/#">
               <Typography color="#121212" fontWeight="semibold" maxContent>
                 {t('news')}
               </Typography>
             </Link>
-            <Link to="/contact">
+            <Link to="/#">
               <Typography color="#121212" fontWeight="semibold" maxContent>
                 {t('contact')}
               </Typography>

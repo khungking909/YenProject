@@ -10,6 +10,7 @@ import { Typography } from '@components/Atom/Typography';
 import { Pagination } from '@components/Molecules/Pagination/Pagination';
 import { ProductCard } from '@components/Molecules/ProductCard';
 import { Select } from '@components/Molecules/Select';
+import { Loading } from '@components/Organism/Loading';
 import { useClickOutsideWhenFocused } from '@hooks/useClickOutsideWhenFocus';
 import useScreenSize from '@hooks/useScreenSize';
 import { useEffect, useState } from 'react';
@@ -39,7 +40,11 @@ export default function Product() {
   const currentPage = parseInt(searchParams.get('page') || '1');
   const search = searchParams.get('search') || '';
   const [activePage, setActivePage] = useState(currentPage);
-  const { data: productData } = useGetProductsQuery({
+  const {
+    data: productData,
+    isLoading,
+    isFetching,
+  } = useGetProductsQuery({
     page: activePage,
     limit: Setting.LIMIT_PRODUCT,
   });
@@ -199,52 +204,56 @@ export default function Product() {
             onClickItem={(id) => onClickToolbarItem(id)}
           />
         </Box>
-        <Box
-          p={{
-            xs: '16px 0',
-            sm: '24px 0',
-            md: '32px 0',
-          }}
-          m="0 auto"
-          display="grid"
-          columns={toolbarActive}
-          gap={{
-            sm: '16px',
-            md: '24px',
-          }}
-        >
-          {searchByName(search.trim(), getSortedProducts()).map((item) => {
-            if (!isMobile && toolbarActive === 1) {
+        {isLoading || isFetching ? (
+          <Loading loadingType="spinner" />
+        ) : (
+          <Box
+            p={{
+              xs: '16px 0',
+              sm: '24px 0',
+              md: '32px 0',
+            }}
+            m="0 auto"
+            display="grid"
+            columns={toolbarActive}
+            gap={{
+              sm: '16px',
+              md: '24px',
+            }}
+          >
+            {searchByName(search.trim(), getSortedProducts()).map((item) => {
+              if (!isMobile && toolbarActive === 1) {
+                return (
+                  <Link to={`/product/${item.slug}`} key={item.id}>
+                    <ProductCell
+                      image={item.images[0]}
+                      name={item.name}
+                      price={item.price}
+                      salePrice={item.salePrice}
+                      description={item.shortDescription}
+                      rate={item.rating}
+                      onClickAddToCart={() => handleOnClickAddToCart(item)}
+                    />
+                  </Link>
+                );
+              }
+
               return (
                 <Link to={`/product/${item.slug}`} key={item.id}>
-                  <ProductCell
+                  <ProductCard
+                    columns={toolbarActive}
                     image={item.images[0]}
                     name={item.name}
                     price={item.price}
                     salePrice={item.salePrice}
-                    description={item.shortDescription}
                     rate={item.rating}
                     onClickAddToCart={() => handleOnClickAddToCart(item)}
                   />
                 </Link>
               );
-            }
-
-            return (
-              <Link to={`/product/${item.slug}`} key={item.id}>
-                <ProductCard
-                  columns={toolbarActive}
-                  image={item.images[0]}
-                  name={item.name}
-                  price={item.price}
-                  salePrice={item.salePrice}
-                  rate={item.rating}
-                  onClickAddToCart={() => handleOnClickAddToCart(item)}
-                />
-              </Link>
-            );
-          })}
-        </Box>
+            })}
+          </Box>
+        )}
         <Box
           width="100%"
           display="flex"
