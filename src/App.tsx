@@ -6,6 +6,8 @@ import router from 'src/app/routes/Router';
 import { setUser } from 'src/app/slices/authSlice/authSlice';
 
 const AppComponent = () => {
+  console.log('AppComponent render');
+
   const dispatch = useDispatch();
   const { data, isSuccess } = useGetUserFromTokenQuery();
 
