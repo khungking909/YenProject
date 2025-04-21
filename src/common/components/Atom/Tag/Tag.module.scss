@@ -72,6 +72,8 @@
     line-height: var(--spacing-28);
     color: var(--color-content-tag);
     max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
