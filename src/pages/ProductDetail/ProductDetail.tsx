@@ -273,7 +273,7 @@ export default function ProductDetail() {
                     {productData?.color.map((color) => (
                       <SwatchesColor
                         key={color.name}
-                        color={color.name}
+                        color={color.value}
                         onClick={() => setActiveColor(color.name)}
                         active={activeColor === color.name}
                       />
