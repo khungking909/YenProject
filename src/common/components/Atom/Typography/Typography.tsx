@@ -24,6 +24,7 @@ export function Typography({
   onClick,
   className,
   children,
+  overflow,
   ...props
 }: Readonly<TypographyProps>) {
   const classText = useMemo(() => {
@@ -38,6 +39,7 @@ export function Typography({
       typographyClass[`text-align--${textAlign}`],
       typographyClass[`white-space--${whiteSpace}`],
       typographyClass[`text-transform--${textTransform}`],
+      typographyClass[`overflow--${overflow}`],
       maxContent ? typographyClass.max__content : '',
       className,
     ];
@@ -53,6 +55,7 @@ export function Typography({
     textAlign,
     whiteSpace,
     textTransform,
+    overflow,
     maxContent,
     className,
   ]);

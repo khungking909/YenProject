@@ -68,7 +68,12 @@
     "checkout": "Go to Checkout",
     "free_shipping": "Free",
     "coupon_code": "Coupon code",
-    "add_cart_success": "Added {{name}} to cart"
+    "add_cart_success": "Added {{name}} to cart",
+    "remove_cart_success": "Removed product from cart",
+    "error_add_cart": "Error adding product to cart",
+    "error_remove_cart": "Error removing product from cart",
+    "error_update_cart": "Error updating product in cart",
+    "update_cart_success": "Updated product in cart"
   },
   "users": {
     "sign_out": "SignOut",

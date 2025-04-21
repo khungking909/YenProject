@@ -27,7 +27,7 @@ const ProductLoop = ({
 
   useEffect(() => {
     if (miniSwiperRef.current) {
-      miniSwiperRef.current.slideTo(currentSlide / 3);
+      miniSwiperRef.current.slideTo(currentSlide / 2);
     }
   }, [currentSlide]);
 
@@ -77,6 +77,7 @@ const ProductLoop = ({
                   productLoopModuleClass.image,
                   index === currentSlide ? productLoopModuleClass.active : '',
                 ])}
+                objectFit="fill"
               />
             </SwiperSlide>
           ))}
@@ -100,8 +101,8 @@ const ProductLoop = ({
           }}
         >
           {imageList.map((image) => (
-            <SwiperSlide key={`main__image ${image}`}>
-              <Image src={image} className={productLoopModuleClass.image} />
+            <SwiperSlide key={`main__image ${image}`} className={productLoopModuleClass.swiper__main}>
+              <Image src={image} className={productLoopModuleClass.image} objectFit="fill" />
             </SwiperSlide>
           ))}
         </Swiper>

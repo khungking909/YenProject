@@ -21,6 +21,7 @@ import {
   useUpdateCartItemMutation,
 } from 'src/app/apis/cartApit';
 import { useLazyGetCouponByCodeQuery } from 'src/app/apis/couponApi';
+import { useToast } from 'src/app/slices/toastSlice/toastSelector';
 import { capitalizeFirstLetter } from 'src/common/untils/capitalizeFirstLetter';
 import { getIsMobile } from 'src/common/untils/isMobile';
 import { ScreenPath } from 'src/constants/screen';
@@ -39,6 +40,7 @@ export default function CartPage() {
   const [couponCodeError, setCouponCodeError] = useState<string | null>(null);
   const [removeItem] = useRemoveItemFromCartMutation();
   const [updateItem] = useUpdateCartItemMutation();
+  const { onShowToast } = useToast();
 
   const {
     register,
@@ -73,9 +75,21 @@ export default function CartPage() {
   const onRemoveItem = async (cartId: string | number) => {
     try {
       await removeItem(cartId.toString()).unwrap();
+
+      onShowToast({
+        message: t('carts.remove_cart_success'),
+        type: 'success',
+        title: t('successfully'),
+        position: 'top-right',
+      });
     } catch (error) {
       if ((error as { status: number }).status === 404) {
-        ///21312
+        onShowToast({
+          message: t('carts.error_remove_cart'),
+          type: 'success',
+          title: t('successfully'),
+          position: 'top-right',
+        });
       }
     }
   };
@@ -85,7 +99,12 @@ export default function CartPage() {
       await updateItem({ cartId: cartId.toString(), quantity }).unwrap();
     } catch (error) {
       if ((error as { status: number }).status === 404) {
-        ///21312
+        onShowToast({
+          message: t('carts.error_update_cart'),
+          type: 'success',
+          title: t('successfully'),
+          position: 'top-right',
+        });
       }
     }
   };

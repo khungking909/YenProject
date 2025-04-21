@@ -50,7 +50,7 @@ const CartCard = ({
           sm: Setting.DIGIT_12,
           md: Setting.DIGIT_14,
         }}
-        width="100%"
+        width="50%"
         flexGrow={1}
       >
         <Box
@@ -71,10 +71,17 @@ const CartCard = ({
               md: Setting.DIGIT_6,
             }}
           >
-            <Typography variant="h7" fontSize={isMobile ? 'base' : 'lg'}>
+            <Typography
+              variant="h7"
+              fontSize={isMobile ? 'base' : 'lg'}
+              whiteSpace="nowrap"
+              overflow="ellipsis"
+            >
               {name}
             </Typography>
-            <Trash size={isMobile ? 'large' : '2XLarge'} onClick={onRemove} />
+            <Box flexGrow={1} display="flex" justifyContent="flex-end">
+              <Trash size={isMobile ? 'large' : '2XLarge'} onClick={onRemove} />
+            </Box>
           </Box>
           <Box display="flex" flexDirection="column">
             <Typography fontSize={isMobile ? 'xs' : 'sm'} color="#868282">{`Size: ${size}`}</Typography>

@@ -88,6 +88,10 @@ export default function Product() {
 
   const [selectSortBy, setSelectSortBy] = useState(SELECT_ITEM_LIST[0].name);
 
+  const finalPrice = (price: number = 0, salePrice: number) => {
+    return salePrice ? price - salePrice : price;
+  };
+
   const onClickToolbarItem = (id: number) => {
     setToolbarActive(id);
   };
@@ -129,7 +133,7 @@ export default function Product() {
       id: product.id,
       quantity: Setting.DIGIT_1,
       name: product.name,
-      price: product.price,
+      price: finalPrice(product.price, product.salePrice),
       image: product.images[0],
       stock: product.stock,
       color: product.color[0].name,

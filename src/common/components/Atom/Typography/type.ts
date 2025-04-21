@@ -15,4 +15,5 @@ export interface TypographyProps {
   readonly className?: string;
   readonly children: React.ReactNode;
   readonly maxContent?: boolean;
+  readonly overflow?: 'hidden' | 'ellipsis' | 'clip';
 }

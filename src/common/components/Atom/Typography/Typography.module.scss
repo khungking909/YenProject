@@ -213,3 +213,22 @@
     text-transform: uppercase;
   }
 }
+
+.overflow {
+  &--ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &--clip {
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+
+  &--hidden {
+    overflow: hidden;
+  }
+}
+

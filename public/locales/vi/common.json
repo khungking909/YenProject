@@ -68,7 +68,11 @@
     "checkout": "Đến thanh toán",
     "free_shipping": "Miễn phí",
     "coupon_code": "Mã giảm giá",
-    "add_cart_success": "Đã thêm {{name}} vào giỏ hàng"
+    "add_cart_success": "Đã thêm {{name}} vào giỏ hàng",
+    "remove_cart_success": "Đã xóa sản phẩm khỏi giỏ hàng",
+    "error_add_cart": "Lỗi khi thêm sản phẩm vào giỏ hàng",
+    "error_remove_cart": "Lỗi khi xóa sản phẩm khỏi giỏ hàng",
+    "error_update_cart": "Lỗi khi cập nhật sản phẩm trong giỏ hàng"
   },
   "users": {
     "sign_out": "Đăng xuất",

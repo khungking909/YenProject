@@ -1,9 +1,10 @@
 @import '../../../../styles/mixins.scss';
 
 .tag {
-  padding: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
   width: max-content;
   min-width: 204px;
+  text-align: center;
 
   &.color {
     &__dark {
@@ -72,31 +73,38 @@
     line-height: var(--spacing-28);
     color: var(--color-content-tag);
     max-width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    & > p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+    }
+    
   }
 }
 
 @include xs {
   .tag {
-    padding: var(--spacing-4);
+    padding: var(--spacing-8) var(--spacing-12);
     min-width: 132px;
 
     .content {
       font-size: var(--spacing-16);
       line-height: var(--spacing-30);
+      max-width: 132px;
     }
   }
 }
 
 @include sm {
   .tag {
-    padding: var(--spacing-4);
+    padding: var(--spacing-10) var(--spacing-14);
     min-width: 158px;
 
     .content {
       font-size: var(--spacing-18);
       line-height: var(--spacing-32);
+      max-width: 132px;
     }
   }
 }

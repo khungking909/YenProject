@@ -88,7 +88,7 @@ export default function ProductDetail() {
       id: product.id,
       quantity: Setting.DIGIT_1,
       name: product.name,
-      price: product.price,
+      price: finalPrice(product.price, product.salePrice),
       image: product.images[0],
       color: activeColor,
       size: activeSize,

@@ -12,7 +12,7 @@
 }
 
 .image {
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .swiper__mini {
@@ -22,4 +22,8 @@
     border: 1px solid #000000;
     transition: border 0.2s ease-in-out;
   }
+}
+
+.swiper__main {
+  height: auto;
 }
