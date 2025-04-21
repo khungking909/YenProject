@@ -43,6 +43,7 @@ const CategoryCarousel = ({ outstandingList = [], title }: CategoryCarouselProps
         md: 32,
       }}
       userSelect="none"
+      backgroundColor={'rgb(0, 0, 0, 0.01)'}
     >
       <Box display="flex" alignItems="center" justifyContent={!isMobile ? 'space-between' : 'center'}>
         <Typography

@@ -16,13 +16,15 @@ export default function Home() {
   const { data = [], isLoading, isFetching } = useGetProductsQuery();
 
   const productOutstanding = useMemo(() => {
-    return data.map((item) => {
-      return {
-        name: item.name,
-        image: item.images[0],
-        slug: item.slug,
-      };
-    });
+    return data
+      .map((item) => {
+        return {
+          name: item.name,
+          image: item.images[0],
+          slug: item.slug,
+        };
+      })
+      .sort(() => Math.random() - 0.5);
   }, [data]);
 
   return (
